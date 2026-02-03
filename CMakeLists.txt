@@ -43,7 +43,11 @@ if(BUILD_LUA)
     set(LUA_INCLUDE_DIR ${THIRD_PARTY_INCLUDE_PATH})
     set(LUA_DIRECTORIES ${THIRD_PARTY_LIB_PATH})
 
-    set(LUA_LIBRARIES luajit-5.1)
+    if(USE_LUAJIT)
+        set(LUA_LIBRARIES luajit-5.1)
+    else()
+        set(LUA_LIBRARIES lua)
+    endif()
 elseif(USE_CUSTOM_LUA)
     set(LUA_INCLUDE_DIR "" CACHE STRING "Lua include directory")
     set(LUA_LIBRARIES "" CACHE STRING "Lua library")
@@ -55,7 +59,11 @@ else()
     endif()
 endif()
 
-include_directories(include ${LUA_INCLUDE_DIR})
+if(USE_LUAJIT)
+    include_directories(include ${LUA_INCLUDE_DIR}/luajit-2.1)
+else()
+    include_directories(include ${LUA_INCLUDE_DIR})
+endif()
 
 set(SRC_FILES
     include/OmicronTK/lua/global.h

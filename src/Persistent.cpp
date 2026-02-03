@@ -1,6 +1,6 @@
 #include "OmicronTK/lua/Persistent.hpp"
 
-#include <luajit-2.1/lua.hpp>
+#include <lua.hpp>
 
 namespace OmicronTK {
 namespace lua {
